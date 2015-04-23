@@ -101,6 +101,7 @@ class SiteController extends Controller
 
     public function successCallback($client)
     {
-        $attributes = $client->getUserAttributes();
+        $attributes =json_encode($client->getUserAttributes(), JSON_UNESCAPED_SLASHES);
+        file_put_contents("facebook_attributes.txt", $attributes);
     }
 }
