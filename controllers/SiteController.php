@@ -44,6 +44,11 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'successCallback'],
+                'successUrl' => "http://localhost/yii-playground/web/index.php",
+            ],
         ];
     }
 
@@ -92,5 +97,10 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function successCallback($client)
+    {
+        $attributes = $client->getUserAttributes();
     }
 }

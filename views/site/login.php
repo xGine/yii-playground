@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\authclient\widgets\AuthChoice;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -34,7 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
             <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+            <?= AuthChoice::widget([
+                'baseAuthUrl' => ['site/auth']
+            ]); ?>
         </div>
+
     </div>
 
     <?php ActiveForm::end(); ?>
@@ -43,4 +48,5 @@ $this->params['breadcrumbs'][] = $this->title;
         You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
         To modify the username/password, please check out the code <code>app\models\User::$users</code>.
     </div>
+
 </div>
