@@ -53,7 +53,15 @@ class SiteController extends Controller
     }
 
     public function actionIndex()
-    {
+    {        
+        $fbsession = Yii::$app->session;
+        $fbname = $fbsession['name'];
+
+        //if(isset($fbsession['name']) && $name = null){
+            return $this->render('index' , ['name' => $fbname]);
+        //}
+
+
         return $this->render('index');
     }
 
@@ -101,7 +109,19 @@ class SiteController extends Controller
 
     public function successCallback($client)
     {
-        $attributes =json_encode($client->getUserAttributes(), JSON_UNESCAPED_SLASHES);
-        file_put_contents("facebook_attributes.txt", $attributes);
+        $fbsession = Yii::$app->session;
+        //client info in an array format
+        $attributes =  $client->getUserAttributes();
+
+        //converts array attri var to json format
+        //$attributes = json_encode($client->getUserAttributes(), JSON_UNESCAPED_SLASHES);
+
+        //if attributes is on json format 
+        //$attributes = json_decode($attributes, true);
+
+        //obtaining $attributes value to session vars
+        $fbsession['name'] = $attributes['name'];
+        
+        //file_put_contents("facebook_attributes.txt", $attributes);
     }
 }
