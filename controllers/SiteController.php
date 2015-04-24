@@ -53,16 +53,12 @@ class SiteController extends Controller
     }
 
     public function actionIndex()
-    {        
-        $fbsession = Yii::$app->session;
-        $fbname = $fbsession['name'];
+    {
+        $session = Yii::$app->session;
 
-        //if(isset($fbsession['name']) && $name = null){
-            return $this->render('index' , ['name' => $fbname]);
-        //}
+        $uid = $session['uid'];
 
-
-        return $this->render('index');
+        return $this->render('index' , ['uid' => $uid]);
     }
 
     public function actionLogin()
@@ -109,19 +105,12 @@ class SiteController extends Controller
 
     public function successCallback($client)
     {
-        $fbsession = Yii::$app->session;
-        //client info in an array format
+        $session = Yii::$app->session;
+
+        //user info from auth client
         $attributes =  $client->getUserAttributes();
 
-        //converts array attri var to json format
-        //$attributes = json_encode($client->getUserAttributes(), JSON_UNESCAPED_SLASHES);
-
-        //if attributes is on json format 
-        //$attributes = json_decode($attributes, true);
-
-        //obtaining $attributes value to session vars
-        $fbsession['name'] = $attributes['name'];
-        
-        //file_put_contents("facebook_attributes.txt", $attributes);
+        //put user id from auth client user attributes to session vars
+        $session['uid'] = $attributes['id'];
     }
 }
