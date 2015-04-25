@@ -18,10 +18,15 @@ use yii\web\AssetBundle;
 class BootstrapSocialAsset extends AssetBundle
 {
     # sourcePath points to the package.
-    public $sourcePath = '@vendor/lipis/bootstrap-social';
+    public $sourcePath = '@vendor/bower/bootstrap-social';
 
     # CSS file to be loaded.
     public $css = [
         'bootstrap-social.css',
     ];
+    public $depends = [
+        'app\assets\FontAwesomeAsset',
+    ];
+
+
 }

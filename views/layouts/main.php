@@ -11,7 +11,6 @@ use app\assets\BootstrapSocialAsset;
 /* @var $content string */
 
 AppAsset::register($this);
-FontAwesomeAsset::register($this);
 BootstrapSocialAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
