@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use app\widgets\BootstrapSocialAuthChoice;
+use app\modules\user\widgets\BootstrapSocialAuthChoice;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-offset-1 col-lg-11">
             <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             <?= BootstrapSocialAuthChoice::widget([
-                'baseAuthUrl' => ['site/auth'],
+                'baseAuthUrl' => ['default/auth'],
             ]); ?>
         </div>
 

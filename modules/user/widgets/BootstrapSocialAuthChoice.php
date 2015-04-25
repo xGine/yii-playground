@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets;
+namespace app\modules\user\widgets;
 
 use yii\authclient\widgets\AuthChoice;
 use yii\helpers\Url;

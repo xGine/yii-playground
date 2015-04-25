@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\assets;
+namespace app\modules\user\assets;
 
 use yii\web\AssetBundle;
 
@@ -25,7 +25,7 @@ class BootstrapSocialAsset extends AssetBundle
         'bootstrap-social.css',
     ];
     public $depends = [
-        'app\assets\FontAwesomeAsset',
+        'app\modules\user\assets\FontAwesomeAsset',
     ];
 
 
