@@ -11,5 +11,3 @@ class Module extends \yii\base\Module
         \Yii::configure($this, require(__DIR__ . '/config.php'));
     }
 }
-
-?>
