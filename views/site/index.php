@@ -9,7 +9,7 @@ $this->title = 'My Yii Application';
         <h1>Congratulations!</h1>
 
 
-        <p class="lead btn-lg"><h2><?= Html::encode($name) ?></h2></p>
+        <p class="lead btn-lg"><h2><?= Html::encode($uid) ?></h2></p>
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
         <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>

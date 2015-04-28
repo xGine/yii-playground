@@ -6,33 +6,10 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
 use app\models\ContactForm;
 
 class SiteController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     public function actions()
     {
@@ -44,48 +21,16 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
-            'auth' => [
-                'class' => 'yii\authclient\AuthAction',
-                'successCallback' => [$this, 'successCallback'],
-                'successUrl' => "http://localhost/yii-playground/web/index.php",
-            ],
         ];
     }
 
     public function actionIndex()
-    {        
-        $fbsession = Yii::$app->session;
-        $fbname = $fbsession['name'];
-
-        //if(isset($fbsession['name']) && $name = null){
-            return $this->render('index' , ['name' => $fbname]);
-        //}
-
-
-        return $this->render('index');
-    }
-
-    public function actionLogin()
     {
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+        $session = Yii::$app->session;
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
+        $uid = $session['uid'];
 
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
+        return $this->render('index' , ['uid' => $uid]);
     }
 
     public function actionContact()
@@ -109,7 +54,7 @@ class SiteController extends Controller
 
     public function successCallback($client)
     {
-        $fbsession = Yii::$app->session;
+        $session = Yii::$app->session;
         //client info in an array format
         $attributes =  $client->getUserAttributes();
 
@@ -120,7 +65,7 @@ class SiteController extends Controller
         //$attributes = json_decode($attributes, true);
 
         //obtaining $attributes value to session vars
-        $fbsession['name'] = $attributes['name'];
+        $session['uid'] = $attributes['id'];
         
         //file_put_contents("facebook_attributes.txt", $attributes);
     }
