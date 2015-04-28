@@ -52,7 +52,53 @@ $config = [
                   'authUrl' => 'https://www.facebook.com/dialog/oauth?display=popup',
               ],
           ],
-        ]
+        ],
+         'eauth' => array(
+            'class' => 'nodge\eauth\EAuth',
+            'popup' => true, // Use the popup window instead of redirecting.
+            'cache' => false, // Cache component name or false to disable cache. Defaults to 'cache' on production environments.
+            'cacheExpire' => 0, // Cache lifetime. Defaults to 0 - means unlimited.
+            'httpClient' => array(
+                // uncomment this to use streams in safe_mode
+                //'useStreamsFallback' => true,
+            ),
+            'services' => array( // You can change the providers and their classes.
+                'yahoo' => array(
+                    'class' => 'nodge\eauth\services\YahooOpenIDService',
+                    //'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
+                ),
+            ),
+        ),
+
+        'i18n' => array(
+            'translations' => array(
+                'eauth' => array(
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@eauth/messages',
+                ),
+            ),
+        ),
+
+        // (optionally) you can configure pretty urls
+        'urlManager' => array(
+            'enablePrettyUrl' => false,
+            'showScriptName' => false,
+            'rules' => array(
+                'login/<service:google|facebook|etc>' => 'site/login',
+            ),
+        ),
+
+        // (optionally) you can configure logging
+        'log' => array(
+            'targets' => array(
+                array(
+                    'class' => 'yii\log\FileTarget',
+                    'logFile' => '@app/runtime/logs/eauth.log',
+                    'categories' => array('nodge\eauth\*'),
+                    'logVars' => array(),
+                ),
+            ),
+        ),
     ],
     'modules' => [
         'user' => [
