@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use app\widgets\BootstrapSocialAuthChoice;
+use app\modules\user\widgets\BootstrapSocialAuthChoice;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= BootstrapSocialAuthChoice::widget([
                 'baseAuthUrl' => ['default/auth'],
             ]); ?>
+            <?php echo \nodge\eauth\Widget::widget(array('action' => '/site/login')); ?>
         </div>
 
     </div>
