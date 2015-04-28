@@ -42,9 +42,9 @@ BootstrapSocialAsset::register($this);
                     ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
                     Yii::$app->user->isGuest ?
-                        ['label' => 'Login', 'url' => ['user/default/login']] :
+                        ['label' => 'Login', 'url' => ['/user/default/login']] :
                         ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                            'url' => ['user/default/logout'],
+                            'url' => ['/user/default/logout'],
                             'linkOptions' => ['data-method' => 'post']],
                 ],
             ]);
